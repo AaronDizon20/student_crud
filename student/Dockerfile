@@ -2,7 +2,8 @@
 FROM eclipse-temurin:21-jdk AS builder
 WORKDIR /app
 COPY . .
-RUN chmod +x ./mvnw && ./mvnw clean package -DskipTests
+# Fix Windows CRLF line endings if present and grant execution rights
+RUN sed -i 's/\r$//' ./mvnw && chmod +x ./mvnw && ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
