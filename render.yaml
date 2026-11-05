@@ -12,10 +12,26 @@ services:
     envVars:
       - key: PORT
         value: 8080
-      - key: SPRING_DATASOURCE_URL
+      - key: DB_HOST
         fromDatabase:
           name: student-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: student-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: student-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: student-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: student-db
+          property: password
 
   # -------------------------------------------------------------
   # 2. Vite + React Frontend Static Site
@@ -43,6 +59,5 @@ services:
 databases:
   - name: student-db
     databaseName: db_student
-    user: postgres
     plan: free
     region: oregon
